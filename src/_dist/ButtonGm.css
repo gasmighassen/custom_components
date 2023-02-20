@@ -1,0 +1,53 @@
+.primary {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  border: none;
+  padding: 10px 15px;
+  background-color: #0059ff;
+  color: aliceblue;
+  border-radius: 15px;
+  font-size: 14px;
+  text-transform: uppercase;
+  transition: all 500ms ease-out;
+}
+.primary:active:enabled {
+  transform: scale(0.3);
+}
+.primary:disabled {
+  background-color: #797a7b;
+  color: #010101;
+}
+.sm {
+  width: max-content;
+  font-size: 12px !important;
+}
+.lg {
+  width: max-content;
+  font-size: 20px !important;
+}
+.ghost {
+  background-color: transparent;
+  color: black;
+}
+.default {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: transparent;
+  border: 1px #0059ff solid;
+  padding: 10px 15px;
+  color: #0059ff;
+  border-radius: 15px;
+  font-size: 14px;
+  text-transform: uppercase;
+  transition: all 500ms ease-out;
+}
+.default:active:enabled {
+  transform: scale(0.3);
+}
+.default:disabled {
+  background-color: #797a7b;
+  color: #010101;
+}
