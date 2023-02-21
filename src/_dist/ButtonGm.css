@@ -4,13 +4,18 @@
   align-items: center;
   cursor: pointer;
   border: none;
-  padding: 10px 15px;
-  background-color: #0059ff;
+  padding: 9px 20px;
+  background-color: #241e4e;
   color: aliceblue;
   border-radius: 15px;
   font-size: 14px;
   text-transform: uppercase;
   transition: all 500ms ease-out;
+}
+.primary:hover {
+  background-color: white;
+  color: #241e4e;
+  border: 1px solid #241e4e;
 }
 .primary:active:enabled {
   transform: scale(0.3);
@@ -36,13 +41,18 @@
   justify-content: center;
   align-items: center;
   background-color: transparent;
-  border: 1px #0059ff solid;
-  padding: 10px 15px;
-  color: #0059ff;
+  border: 1px #241e4e solid;
+  padding: 9px 20px;
+  color: #241e4e;
   border-radius: 15px;
   font-size: 14px;
   text-transform: uppercase;
   transition: all 500ms ease-out;
+}
+.default:hover {
+  background-color: #241e4e;
+  color: white;
+  background-position: left;
 }
 .default:active:enabled {
   transform: scale(0.3);
@@ -50,4 +60,25 @@
 .default:disabled {
   background-color: #797a7b;
   color: #010101;
+}
+.linkBtn {
+  text-decoration: none;
+  color: #241e4e;
+  background-size: 200%;
+  padding: 9px 20px;
+  border-radius: 15px;
+  transition: 500ms ease-out;
+}
+.linkBtn:after {
+  display: block;
+  content: "";
+  border-bottom: solid 1px #241e4e;
+  transform: scaleX(0);
+  transition: transform 500ms ease-in-out;
+}
+.linkBtn:hover:after {
+  transform: scaleX(1);
+}
+.linkBtn:after {
+  transform-origin: 0% 100%;
 }
