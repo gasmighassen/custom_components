@@ -2,7 +2,7 @@ import React, { ReactNode, useState } from "react";
 import { JsxElement } from "typescript";
 import "../_dist/ButtonGm.css";
 
-type Props = {
+export type IButtonGm = {
   type?: "primary" | "default" | "dashed" | "textBtn" | "linkBtn" | "ghost";
   onClick?: () => void;
   block?: boolean;
@@ -13,11 +13,11 @@ type Props = {
   shape?: "default" | "circle" | "round";
   size?: "lg" | "md" | "sm";
   target?: string;
-
+ 
   children?: string | JsxElement | ReactNode;
 };
 
-const ButtonGm: React.FC<Props> = ({
+const ButtonGm: React.FC<IButtonGm> = ({
   type = "primary",
   block,
 
@@ -26,7 +26,7 @@ const ButtonGm: React.FC<Props> = ({
   href = "",
   icon,
   shape = "default",
-  size="md",
+  size = "md",
   target = "",
   children = type,
 

@@ -64,9 +64,11 @@
 .linkBtn {
   text-decoration: none;
   color: #241e4e;
+  display: block;
   background-size: 200%;
   padding: 9px 20px;
   border-radius: 15px;
+  width: max-content;
   transition: 500ms ease-out;
 }
 .linkBtn:after {

@@ -1,0 +1,9 @@
+.dd-item {
+  padding: 10px 15px;
+  width: 50%;
+  cursor: pointer;
+}
+.dd-item:hover {
+  background-color: #241e4e;
+  color: white;
+}
