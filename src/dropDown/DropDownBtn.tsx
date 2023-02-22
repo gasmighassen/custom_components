@@ -17,15 +17,16 @@ const DropDownBtn: React.FC<Props> = ({ children }) => {
   return (
     <div className="dd-container">
       <div className="actionBtn-dd">
-        <button className="primary" onMouseEnter={toggleEnter}>
-          Select item
-        </button>
-
-        {open && (
-          <ul className="list-items" onMouseLeave={toggleLeave}>
-            {children}
-          </ul>
-        )}
+        <div className="dd-content">
+          <button className="primary" onMouseEnter={toggleEnter}>
+            Select item
+          </button>
+          {open && (
+            <ul className="list-items" onMouseLeave={toggleLeave}>
+              {children}
+            </ul>
+          )}
+        </div>
       </div>
     </div>
   );

@@ -7,30 +7,34 @@
 
   100% {
     opacity: 1;
-    top: 10%;
+    top: 100%;
     left: 3%;
   }
 }
 
 .dd-container {
-  position: relative;
   width: 100%;
   height: 100%;
-  display: inline;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .actionBtn-dd {
   width: 100%;
   height: max-content;
-  z-index: 10;
 }
 .list-items {
   width: 100%;
   list-style: none;
   padding: 0;
-  margin: 0;
+  margin: 1%;
   position: absolute;
-  top: 10%;
+  top: 100%;
   left: 3%;
   z-index: 9;
   animation: slideDown 700ms ease-in-out;
+}
+.dd-content {
+  position: relative;
+  width: 100%;
 }
