@@ -1,7 +1,7 @@
-export const data:any = [
+export const data = [
   {
     id: 1,
-    first_name: "Jeanette",
+    label: "Jeanette",
     last_name: "Penddreth",
     email: "jpenddreth0@census.gov",
     gender: "Female",
@@ -9,7 +9,7 @@ export const data:any = [
   },
   {
     id: 2,
-    first_name: "Giavani",
+    label: "Giavani",
     last_name: "Frediani",
     email: "gfrediani1@senate.gov",
     gender: "Male",
@@ -17,7 +17,7 @@ export const data:any = [
   },
   {
     id: 3,
-    first_name: "Noell",
+    label: "Noell",
     last_name: "Bea",
     email: "nbea2@imageshack.us",
     gender: "Female",
@@ -25,7 +25,7 @@ export const data:any = [
   },
   {
     id: 4,
-    first_name: "Willard",
+    label: "Willard",
     last_name: "Valek",
     email: "wvalek3@vk.com",
     gender: "Male",
