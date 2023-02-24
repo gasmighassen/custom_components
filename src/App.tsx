@@ -3,11 +3,11 @@ import ButtonGm from "./buttons/ButtonGm";
 import "./_dist/App.css";
 import DropDownBtn from "./dropDown/DropDownBtn";
 import DropDownItems from "./dropDown/DropDownItems";
-import SelectGm, { Option } from "./Select/SelectGm";
-
-
-
-
+import SelectGm from "./Select/SelectGm";
+import SelectGeneric from "./Select/SelectGeneric";
+import { data } from "./data/data";
+import Select from "./Select/Select";
+import SelectItem from "./Select/SelectItem";
 function App() {
   const targets = [
     { value: "dqsd", label: "dqsdqsd" },
@@ -21,8 +21,12 @@ function App() {
   const test = () => {
     console.log("tested");
   };
-  const [value, setValue] = useState<Option[]>([targets[0]]);
+  const [value, setValue] = useState<any>([]);
+  const [first, setfirst] = useState<string | undefined | number>("");
 
+  const [selected, setSelected] = useState<any>([]);
+  console.log(value);
+  console.log(first);
   return (
     <div className="App">
       <div className="buttons-container">
@@ -53,13 +57,24 @@ function App() {
         <DropDownItems>Lorem, ipsum dolor.</DropDownItems>
         <DropDownItems>Lorem ipsum dolor sit amet consectetur.</DropDownItems>
       </DropDownBtn>
+      <div className="select">
+        <SelectGm
+          options={data}
+          multiple
+          value={value}
+          onChange={(option) => setValue(option)}
+        />
 
-      <SelectGm
-        options={targets}
-        multiple
-        value={value}
-        onChange={(option) => setValue(option)}
-      />
+        {/* <SelectGeneric
+          items={data}
+          value={selected}
+          render={(data) => (
+            <li onClick={(e) => setSelected([...selected, data.last_name])}>
+              {data.last_name}
+            </li>
+          )}
+        /> */}
+      </div>
     </div>
   );
 }

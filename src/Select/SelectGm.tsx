@@ -1,27 +1,31 @@
 import React, { useEffect, useState } from "react";
 import "../_dist/SelectGm.css";
 
-export type Option = {
+ export type Option = {
   value: string;
   label: string;
-};
+}; 
 type MultipleSelectProps = {
   multiple: true;
   value: Option[];
+
   onChange: (value: Option[]) => void;
 };
 
 type SingleSelectProps = {
   multiple: false;
   value: Option;
+
   onChange: (value: Option | undefined) => void;
 };
-type Props = {
-  options: Option[];
+type Props<SItem> = {
+  options: SItem[];
 } & (SingleSelectProps | MultipleSelectProps);
-const SelectGm = ({ multiple, value, onChange, options }: Props) => {
+function SelectGm<SItem>({ multiple, value, onChange, options }: Props<SItem>) {
   const [show, setShow] = useState(false);
   const [highlightedIndex, setHighlightedIndex] = useState(0);
+
+  console.log(value);
   function clearOptions() {
     multiple ? onChange([]) : onChange(undefined);
   }
@@ -80,7 +84,7 @@ const SelectGm = ({ multiple, value, onChange, options }: Props) => {
       <div className="sl-divider"></div>
       <div className="sl-caret"></div>
       <ul className={`sl-options ${show ? "show" : ""}`}>
-        {options.map((option, index) => (
+        {options.map((option: any, index) => (
           <li
             onClick={(e) => {
               e.stopPropagation();
@@ -99,6 +103,6 @@ const SelectGm = ({ multiple, value, onChange, options }: Props) => {
       </ul>
     </div>
   );
-};
+}
 
 export default SelectGm;
