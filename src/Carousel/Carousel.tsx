@@ -3,33 +3,34 @@ import "../_dist/Carousel.css";
 
 type Props = {
   children?: JSX.Element | ReactNode;
+  slidNb?: number;
 };
 
-const Carousel = ({ children }: Props) => {
+const Carousel = ({ children, slidNb = 1 }: Props) => {
   const [step, setStep] = useState(0);
 
   function updateStep(newStep: number) {
     if (newStep < 0) {
       newStep = 0;
     } else if (newStep >= React.Children.count(children)) {
-      newStep = React.Children.count(children) - 1;
+      newStep = React.Children.count(children) - slidNb;
     }
     setStep(newStep);
   }
-
+  console.log(React.Children.count(children));
   return (
     <div className="carousel">
       <div className="action-carousel">
-        <span className="arrow" onClick={() => updateStep(step - 1)}>
+        <span className="arrow" onClick={() => updateStep(step - slidNb)}>
           <img src="../../images/left_arrow.svg" alt="" />
         </span>
-        <span className="arrow" onClick={() => updateStep(step + 1)}>
+        <span className="arrow" onClick={() => updateStep(step + slidNb)}>
           <img src="../../images/right_arrow.svg" alt="" />
         </span>
       </div>
       <div
         className="inner-carousel"
-        style={{ transform: `translateX(-${step * 300}%)` }}
+        style={{ transform: `translateX(-${step * 100}%)` }}
       >
         {React.Children.map(children, (child: any, index) => {
           return React.cloneElement(child);
