@@ -120,55 +120,10 @@ function App() {
         <h1>On/Off</h1>
         <ToggleBtn isOn={value3} onChange={() => setValue3(!value3)} />
       </div>
-      <Carousel>
-        <CarouselItem>
-          <div className="image">
-            <img
-              src="https://images.unsplash.com/photo-1677396390519-c56094fc16b1?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwyMHx8fGVufDB8fHx8&auto=format&fit=crop&w=500&q=60"
-              alt=""
-            />
-          </div>
-        </CarouselItem>
-        <CarouselItem>
-          <div className="image">
-            <img
-              src="https://images.unsplash.com/photo-1677350839343-6d94f3f88f42?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwxMnx8fGVufDB8fHx8&auto=format&fit=crop&w=500&q=60"
-              alt=""
-            />
-          </div>
-        </CarouselItem>
-        <CarouselItem>
-          <div className="image">
-            <img
-              src="https://images.unsplash.com/photo-1677443413010-2982f93f5cb9?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwxNXx8fGVufDB8fHx8&auto=format&fit=crop&w=500&q=60"
-              alt=""
-            />
-          </div>
-        </CarouselItem>
-        <CarouselItem>
-          <div className="image">
-            <img
-              src="https://images.unsplash.com/photo-1677396390519-c56094fc16b1?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwyMHx8fGVufDB8fHx8&auto=format&fit=crop&w=500&q=60"
-              alt=""
-            />
-          </div>
-        </CarouselItem>
-        <CarouselItem>
-          <div className="image">
-            <img
-              src="https://images.unsplash.com/photo-1677350839343-6d94f3f88f42?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwxMnx8fGVufDB8fHx8&auto=format&fit=crop&w=500&q=60"
-              alt=""
-            />
-          </div>
-        </CarouselItem>
-        <CarouselItem>
-          <div className="image">
-            <img
-              src="https://images.unsplash.com/photo-1677443413010-2982f93f5cb9?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwxNXx8fGVufDB8fHx8&auto=format&fit=crop&w=500&q=60"
-              alt=""
-            />
-          </div>
-        </CarouselItem>
+      <Carousel slidNb={2}>
+        {data2.map((el) => (
+          <CarouselItem>{el.jobTitle}</CarouselItem>
+        ))}
       </Carousel>
       <div className="multidrop">
         <MultiDrop />
