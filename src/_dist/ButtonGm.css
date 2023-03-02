@@ -10,7 +10,7 @@
   border-radius: 15px;
   font-size: 14px;
   text-transform: uppercase;
-  transition: all 500ms ease-out;
+  transition: all 300ms ease;
 }
 .primary:hover {
   background-color: white;
@@ -18,11 +18,11 @@
   border: 1px solid #241e4e;
 }
 .primary:active:enabled {
-  transform: scale(0.3);
+  transform: scale(0.9);
 }
 .primary:disabled {
-  background-color: #797a7b;
-  color: #010101;
+  background-color: #d0d3d5;
+  color: #696767;
 }
 .sm {
   width: max-content;
@@ -55,11 +55,11 @@
   background-position: left;
 }
 .default:active:enabled {
-  transform: scale(0.3);
+  transform: scale(0.9);
 }
 .default:disabled {
-  background-color: #797a7b;
-  color: #010101;
+  background-color: #d0d3d5;
+  color: #696767;
 }
 .linkBtn {
   text-decoration: none;

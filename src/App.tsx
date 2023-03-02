@@ -3,43 +3,49 @@ import ButtonGm from "./buttons/ButtonGm";
 import "./_dist/App.css";
 import DropDownBtn from "./dropDown/DropDownBtn";
 import DropDownItems from "./dropDown/DropDownItems";
-import SelectGm from "./Select/SelectGm";
+
+import { data, data2 } from "./data/data";
+import ToggleBtn from "./ToggleBtn/ToggleBtn";
+import Carousel from "./Carousel/Carousel";
+import CarouselItem from "./Carousel/CarouselItem";
 import SelectGeneric from "./Select/SelectGeneric";
-import { data } from "./data/data";
-import Select from "./Select/Select";
-import SelectItem from "./Select/SelectItem";
+import MultiDrop from "./MultilevelDrop/MultiDrop";
+
 function App() {
-  const targets = [
-    { value: "dqsd", label: "dqsdqsd" },
-    { value: "dqsdqs", label: "qsdqsdqsd" },
-    { value: "dqsdqsd", label: "sqdqsdq" },
-    { value: "qsdqsd", label: "qsdqsd" },
-    { value: "dqsdq", label: "dqsdqsd" },
-    { value: "qsdqsd", label: "dqsdqsd" },
-    { value: "es2dqsdqs", label: "dqsdqsd" },
-  ];
   const test = () => {
     console.log("tested");
   };
-  const [value, setValue] = useState<any>([]);
+  const [value, setValue] = useState([]);
+  const [value2, setValue2] = useState<any>([]);
+  const [value3, setValue3] = useState(false);
   const [first, setfirst] = useState<string | undefined | number>("");
-
+  const label = "Name";
   const [selected, setSelected] = useState<any>([]);
   console.log(value);
-  console.log(first);
   return (
     <div className="App">
       <div className="buttons-container">
         <h1>Link button</h1>
-        <ButtonGm type="linkBtn" onClick={() => console.log("test")}>
-          Link Button
+        <ButtonGm
+          type="linkBtn"
+          onClick={() => {
+            test;
+          }}
+        >
+          Disabled
+        </ButtonGm>
+        <h1>disabled button</h1>
+        <ButtonGm type="default" disabled>
+          isabled
         </ButtonGm>
         <h1>Primary Ghosted button</h1>
         <ButtonGm
           type="primary"
           size="md"
           ghost={true}
-          onClick={() => console.log("test")}
+          onClick={() => {
+            test;
+          }}
         >
           Ghost button
         </ButtonGm>
@@ -47,33 +53,125 @@ function App() {
         <ButtonGm
           type="primary"
           size="md"
-          onClick={() => console.log("test")}
+          onClick={() => {
+            test;
+          }}
         ></ButtonGm>
       </div>
+      <div>
+        <h1>Dropdown</h1>
+        <div className="drop">
+          <DropDownBtn>
+            <DropDownItems onClick={test}>Lorem ipsum dolor sit.</DropDownItems>
+            <DropDownItems>Lorem ipsum dolor sit amet.</DropDownItems>
+            <DropDownItems>Lorem, ipsum dolor.</DropDownItems>
+            <DropDownItems>
+              Lorem ipsum dolor sit amet consectetur.
+            </DropDownItems>
+          </DropDownBtn>
+          <DropDownBtn>
+            <DropDownItems onClick={test}>Lorem ipsum dolor sit.</DropDownItems>
+            <DropDownItems>Lorem ipsum dolor sit amet.</DropDownItems>
+            <DropDownItems>Lorem, ipsum dolor.</DropDownItems>
+            <DropDownItems>
+              Lorem ipsum dolor sit amet consectetur.
+            </DropDownItems>
+          </DropDownBtn>
+        </div>
+      </div>
 
-      <DropDownBtn>
-        <DropDownItems onClick={test}>Lorem ipsum dolor sit.</DropDownItems>
-        <DropDownItems>Lorem ipsum dolor sit amet.</DropDownItems>
-        <DropDownItems>Lorem, ipsum dolor.</DropDownItems>
-        <DropDownItems>Lorem ipsum dolor sit amet consectetur.</DropDownItems>
-      </DropDownBtn>
       <div className="select">
+        <h1>single select</h1>
+        {/*  <SelectGm
+          options={data}
+          multiple={false}
+          value={value}
+          icon="chain"
+          onChange={(option) => setValue(option)}
+        />
+        <h1>Multi select</h1>
         <SelectGm
           options={data}
           multiple
-          value={value}
-          onChange={(option) => setValue(option)}
-        />
-
-        {/* <SelectGeneric
-          items={data}
-          value={selected}
-          render={(data) => (
-            <li onClick={(e) => setSelected([...selected, data.last_name])}>
-              {data.last_name}
-            </li>
-          )}
+          value={value2}
+          onChange={(option) => setValue2(option)}
         /> */}
+
+        {/*    <SelectGeneric
+          items={data}
+          multiple
+          label="Name"
+          value={value}
+          onChange={() => setValue}
+          render={(option) => <li>{option.Name}</li>}
+        />
+ */}
+        <h1>job titles</h1>
+        <SelectGeneric
+          items={data}
+          multiple
+          value={setValue}
+          label="Name"
+          icon="chain"
+          render={(option) => <li>{option.Name}</li>}
+        />
+      </div>
+      <div className="checkbtn">
+        <h1>On/Off</h1>
+        <ToggleBtn isOn={value3} onChange={() => setValue3(!value3)} />
+      </div>
+      <Carousel>
+        <CarouselItem>
+          <div className="image">
+            <img
+              src="https://images.unsplash.com/photo-1677396390519-c56094fc16b1?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwyMHx8fGVufDB8fHx8&auto=format&fit=crop&w=500&q=60"
+              alt=""
+            />
+          </div>
+        </CarouselItem>
+        <CarouselItem>
+          <div className="image">
+            <img
+              src="https://images.unsplash.com/photo-1677350839343-6d94f3f88f42?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwxMnx8fGVufDB8fHx8&auto=format&fit=crop&w=500&q=60"
+              alt=""
+            />
+          </div>
+        </CarouselItem>
+        <CarouselItem>
+          <div className="image">
+            <img
+              src="https://images.unsplash.com/photo-1677443413010-2982f93f5cb9?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwxNXx8fGVufDB8fHx8&auto=format&fit=crop&w=500&q=60"
+              alt=""
+            />
+          </div>
+        </CarouselItem>
+        <CarouselItem>
+          <div className="image">
+            <img
+              src="https://images.unsplash.com/photo-1677396390519-c56094fc16b1?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwyMHx8fGVufDB8fHx8&auto=format&fit=crop&w=500&q=60"
+              alt=""
+            />
+          </div>
+        </CarouselItem>
+        <CarouselItem>
+          <div className="image">
+            <img
+              src="https://images.unsplash.com/photo-1677350839343-6d94f3f88f42?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwxMnx8fGVufDB8fHx8&auto=format&fit=crop&w=500&q=60"
+              alt=""
+            />
+          </div>
+        </CarouselItem>
+        <CarouselItem>
+          <div className="image">
+            <img
+              src="https://images.unsplash.com/photo-1677443413010-2982f93f5cb9?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwxNXx8fGVufDB8fHx8&auto=format&fit=crop&w=500&q=60"
+              alt=""
+            />
+          </div>
+        </CarouselItem>
+      </Carousel>
+      <div className="multidrop">
+        <MultiDrop />
       </div>
     </div>
   );

@@ -1,6 +1,7 @@
 .dd-item {
   padding: 10px 15px;
   width: 50%;
+  height: 100%;
   cursor: pointer;
 }
 .dd-item:hover {
