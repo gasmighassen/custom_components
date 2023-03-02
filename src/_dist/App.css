@@ -1,10 +1,11 @@
-.App {
+/* .App {
   display: flex;
   justify-content: space-around;
+  flex-wrap: wrap;
   align-items: center;
   width: 100%;
-  height: 60vh;
-}
+  height: 100%;
+} */
 .buttons-container {
   width: max-content;
   height: max-content;
@@ -16,4 +17,7 @@
   justify-content: center;
   align-items: center;
   row-gap: 5%;
+}
+.drop {
+  display: flex;
 }
