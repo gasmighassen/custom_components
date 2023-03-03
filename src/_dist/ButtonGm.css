@@ -23,6 +23,7 @@
 .primary:disabled {
   background-color: #d0d3d5;
   color: #696767;
+  cursor: not-allowed;
 }
 .sm {
   width: max-content;
@@ -60,6 +61,7 @@
 .default:disabled {
   background-color: #d0d3d5;
   color: #696767;
+  cursor: not-allowed;
 }
 .linkBtn {
   text-decoration: none;
