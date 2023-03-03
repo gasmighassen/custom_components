@@ -4,20 +4,15 @@ import "../_dist/SelectGm.css";
 interface SelectProps<SItem> {
   items: SItem[];
   render: (item: SItem) => React.ReactNode;
-  multiple?: true;
-  label: string;
+  multiple?: boolean;
   value: React.Dispatch<React.SetStateAction<never[]>>;
-  onChange?: (value: SItem) => void;
   icon?: "arrow" | "chain" | "courant";
 }
 
 export default function SelectGeneric<SItem>({
   items,
-
   render,
-
   value,
-  onChange,
   icon = "arrow",
 }: SelectProps<SItem>) {
   const [show, setShow] = useState(false);
@@ -31,8 +26,7 @@ export default function SelectGeneric<SItem>({
 
   useEffect(() => {
     value(selected);
-    console.log(selected);
-  }, [toSHow]);
+  }, [selected]);
 
   const selectIcon = (icon: string) => {
     switch (icon) {
@@ -48,8 +42,6 @@ export default function SelectGeneric<SItem>({
     }
   };
 
-  
-
   return (
     <div
       className="sl-container"
@@ -59,8 +51,7 @@ export default function SelectGeneric<SItem>({
       <span className="sl-value">
         <span> {toSHow}</span>
       </span>
-      <button className="clear-btn">&times;</button>
-      <div className="sl-divider"></div>
+
       <span>{selectIcon(icon)}</span>
       <ul className={`sl-options ${show ? "show" : ""}`}>
         {items.map((item: any) => (

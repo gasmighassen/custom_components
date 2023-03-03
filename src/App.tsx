@@ -4,12 +4,13 @@ import "./_dist/App.css";
 import DropDownBtn from "./dropDown/DropDownBtn";
 import DropDownItems from "./dropDown/DropDownItems";
 
-import { data, data2 } from "./data/data";
+import { data, data2, data3 } from "./data/data";
 import ToggleBtn from "./ToggleBtn/ToggleBtn";
 import Carousel from "./Carousel/Carousel";
 import CarouselItem from "./Carousel/CarouselItem";
 import SelectGeneric from "./Select/SelectGeneric";
-import MultiDrop from "./MultilevelDrop/MultiDrop";
+
+import Cascader from "./Cascader/Cascader";
 
 function App() {
   const test = () => {
@@ -21,7 +22,7 @@ function App() {
   const [first, setfirst] = useState<string | undefined | number>("");
   const label = "Name";
   const [selected, setSelected] = useState<any>([]);
-  console.log(value);
+
   return (
     <div className="App">
       <div className="buttons-container">
@@ -36,7 +37,7 @@ function App() {
         </ButtonGm>
         <h1>disabled button</h1>
         <ButtonGm type="default" disabled>
-          isabled
+          Disabled
         </ButtonGm>
         <h1>Primary Ghosted button</h1>
         <ButtonGm
@@ -79,39 +80,24 @@ function App() {
           </DropDownBtn>
         </div>
       </div>
-
+      <div className="multidrop">
+        <Cascader
+          keys={[
+            "jobTitle",
+            "industry",
+            "field",
+            "LevelofExpertise",
+            "Speciality",
+          ]}
+          data={data3}
+        />
+      </div>
       <div className="select">
-        <h1>single select</h1>
-        {/*  <SelectGm
-          options={data}
-          multiple={false}
-          value={value}
-          icon="chain"
-          onChange={(option) => setValue(option)}
-        />
-        <h1>Multi select</h1>
-        <SelectGm
-          options={data}
-          multiple
-          value={value2}
-          onChange={(option) => setValue2(option)}
-        /> */}
-
-        {/*    <SelectGeneric
-          items={data}
-          multiple
-          label="Name"
-          value={value}
-          onChange={() => setValue}
-          render={(option) => <li>{option.Name}</li>}
-        />
- */}
         <h1>job titles</h1>
         <SelectGeneric
           items={data}
           multiple
           value={setValue}
-          label="Name"
           icon="chain"
           render={(option) => <li>{option.Name}</li>}
         />
@@ -120,14 +106,56 @@ function App() {
         <h1>On/Off</h1>
         <ToggleBtn isOn={value3} onChange={() => setValue3(!value3)} />
       </div>
-      <Carousel slidNb={2}>
-        {data2.map((el) => (
-          <CarouselItem>{el.jobTitle}</CarouselItem>
-        ))}
+      <Carousel slidNb={3}>
+        <CarouselItem>
+          <div className="image">
+            <img
+              src="https://images.unsplash.com/photo-1677396390519-c56094fc16b1?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwyMHx8fGVufDB8fHx8&auto=format&fit=crop&w=500&q=60"
+              alt=""
+            />
+          </div>
+        </CarouselItem>
+        <CarouselItem>
+          <div className="image">
+            <img
+              src="https://images.unsplash.com/photo-1677350839343-6d94f3f88f42?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwxMnx8fGVufDB8fHx8&auto=format&fit=crop&w=500&q=60"
+              alt=""
+            />
+          </div>
+        </CarouselItem>
+        <CarouselItem>
+          <div className="image">
+            <img
+              src="https://images.unsplash.com/photo-1677443413010-2982f93f5cb9?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwxNXx8fGVufDB8fHx8&auto=format&fit=crop&w=500&q=60"
+              alt=""
+            />
+          </div>
+        </CarouselItem>
+        <CarouselItem>
+          <div className="image">
+            <img
+              src="https://images.unsplash.com/photo-1677396390519-c56094fc16b1?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwyMHx8fGVufDB8fHx8&auto=format&fit=crop&w=500&q=60"
+              alt=""
+            />
+          </div>
+        </CarouselItem>
+        <CarouselItem>
+          <div className="image">
+            <img
+              src="https://images.unsplash.com/photo-1677350839343-6d94f3f88f42?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwxMnx8fGVufDB8fHx8&auto=format&fit=crop&w=500&q=60"
+              alt=""
+            />
+          </div>
+        </CarouselItem>
+        <CarouselItem>
+          <div className="image">
+            <img
+              src="https://images.unsplash.com/photo-1677443413010-2982f93f5cb9?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwxNXx8fGVufDB8fHx8&auto=format&fit=crop&w=500&q=60"
+              alt=""
+            />
+          </div>
+        </CarouselItem>
       </Carousel>
-      <div className="multidrop">
-        <MultiDrop />
-      </div>
     </div>
   );
 }

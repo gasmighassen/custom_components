@@ -17,7 +17,7 @@ const Carousel = ({ children, slidNb = 1 }: Props) => {
     }
     setStep(newStep);
   }
-  console.log(React.Children.count(children));
+
   return (
     <div className="carousel">
       <div className="action-carousel">
@@ -30,7 +30,10 @@ const Carousel = ({ children, slidNb = 1 }: Props) => {
       </div>
       <div
         className="inner-carousel"
-        style={{ transform: `translateX(-${step * 100}%)` }}
+        style={{
+          transform: `translateX(-${step * 100}%)`,
+          width: `${100 / slidNb}%`,
+        }}
       >
         {React.Children.map(children, (child: any, index) => {
           return React.cloneElement(child);
