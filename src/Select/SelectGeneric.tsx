@@ -54,8 +54,10 @@ export default function SelectGeneric<SItem>({
 
       <span>{selectIcon(icon)}</span>
       <ul className={`sl-options ${show ? "show" : ""}`}>
-        {items.map((item: any) => (
-          <li onClick={() => addSelected(item)}>{render(item)}</li>
+        {items.map((item: any, i) => (
+          <li key={i} onClick={() => addSelected(item)}>
+            {render(item)}
+          </li>
         ))}
       </ul>
     </div>
