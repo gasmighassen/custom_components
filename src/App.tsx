@@ -11,6 +11,7 @@ import CarouselItem from "./Carousel/CarouselItem";
 import SelectGeneric from "./Select/SelectGeneric";
 
 import Cascader from "./Cascader/Cascader";
+import DatePicker from "./DatePicker/DatePicker";
 
 function App() {
   const test = () => {
@@ -60,6 +61,7 @@ function App() {
           }}
         ></ButtonGm>
       </div>
+
       <div>
         <h1>Dropdown</h1>
         <div className="drop">
@@ -109,6 +111,7 @@ function App() {
           data={data3}
         />
       </div>
+
       <div className="carou">
         <Carousel slidNb={3}>
           <CarouselItem>
@@ -160,6 +163,9 @@ function App() {
             </div>
           </CarouselItem>
         </Carousel>
+      </div>
+      <div className="datePicker">
+        <DatePicker />
       </div>
     </div>
   );
