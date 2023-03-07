@@ -22,7 +22,8 @@ function App() {
   const [first, setfirst] = useState<string | undefined | number>("");
   const label = "Name";
   const [selected, setSelected] = useState<any>([]);
-
+  const [filter, setFilter] = useState<any>();
+  console.log(filter);
   return (
     <div className="App">
       <div className="buttons-container">
@@ -97,6 +98,7 @@ function App() {
       </div>
       <div className="multidrop">
         <Cascader
+          value={setFilter}
           keys={[
             "jobTitle",
             "industry",

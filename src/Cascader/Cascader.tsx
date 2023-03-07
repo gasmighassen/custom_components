@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "../_dist/Cascader.css";
+import { stringify } from "querystring";
 
 interface ArrayProp<T> {
   [key: string]: T;
@@ -8,22 +9,28 @@ interface ArrayProp<T> {
 interface CascaderProps {
   data: ArrayProp<any>[];
   keys: string[];
+  value: React.Dispatch<any>;
 }
 
-const Cascader: React.FC<CascaderProps> = ({ data, keys }) => {
+const Cascader: React.FC<CascaderProps> = ({ data, keys, value }) => {
   const [show, setShow] = useState(false);
   const [filter, setFilter] = useState({
     level1: "Please Select",
     level2: "",
     level3: "",
   });
-  const [showSpeciality, setshowSpeciality] = useState(true);
-  const [showSeniority, setShowSeniority] = useState(false);
-  const [showField, setShowField] = useState(false);
-  const [showIndustry, setShowIndustry] = useState(false);
-  const [active, setActive] = useState("");
 
-  console.log(filter);
+  const [showSpeciality, setshowSpeciality] = useState(true);
+  const [showSeniority, setShowSeniority] = useState(true);
+  const [showField, setShowField] = useState(true);
+  const [showIndustry, setShowIndustry] = useState(true);
+  const [active, setActive] = useState<any>();
+  const [active2, setActive2] = useState<any>();
+  const [active3, setActive3] = useState<any>();
+  useEffect(() => {
+    value(filter);
+  }, [filter]);
+
   const newData: { key: string; value: any }[] = [];
   data.map((d) =>
     keys.map((key) => {
@@ -41,13 +48,23 @@ const Cascader: React.FC<CascaderProps> = ({ data, keys }) => {
   );
 
   return (
-    <div className="cascader" onBlur={() => setShow(!show)}>
+    <div
+      className="cascader"
+      tabIndex={0}
+      onBlur={() => {
+        setShow(!show);
+      }}
+    >
       <div className="cascader-input" onClick={() => setShow(!show)}>
         <span className="selected-filter">
           {Object.values(filter).map((el) => `${el} `)}
         </span>
         <div className="arrow-logo">
-          <img src="../../images/arrow_down_black.svg" alt="" />
+          {show ? (
+            <img src="../../images/arrow_down_black.svg" alt="" />
+          ) : (
+            <img src="../../images/right_arrow.svg" alt="" />
+          )}
         </div>
       </div>
 
@@ -65,7 +82,8 @@ const Cascader: React.FC<CascaderProps> = ({ data, keys }) => {
                     level3: "",
                   });
                   setActive("colored");
-                  setshowSpeciality(!showSpeciality);
+                  setshowSpeciality(false);
+                  setActive2(-1);
                 }
               }}
             >
@@ -85,6 +103,8 @@ const Cascader: React.FC<CascaderProps> = ({ data, keys }) => {
                     level3: "",
                   });
                   setActive("colore");
+                  setShowSeniority(false);
+                  setActive2(-1);
                 }
               }}
             >
@@ -103,7 +123,8 @@ const Cascader: React.FC<CascaderProps> = ({ data, keys }) => {
                   level3: "",
                 });
                 setActive("color");
-                setShowSeniority(!showSeniority);
+                setShowField(false);
+                setActive2(-1);
               }}
             >
               <span>Field</span>
@@ -121,7 +142,8 @@ const Cascader: React.FC<CascaderProps> = ({ data, keys }) => {
                   level3: "",
                 });
                 setActive("colo");
-                setShowField(!showField);
+                setShowIndustry(false);
+                setActive2(-1);
               }}
             >
               <span>Industry</span>
@@ -135,13 +157,15 @@ const Cascader: React.FC<CascaderProps> = ({ data, keys }) => {
               <ul className="level1-wrapper">
                 {unique
                   .filter((f) => f.key === "jobTitle")
-                  .map((el, i) => (
+                  .map((el, i: any) => (
                     <li
-                      className="level1-item"
+                      className={active2 === i ? "active" : "desactive"}
                       key={i}
                       onClick={() => {
                         setshowSpeciality(true);
                         setFilter({ ...filter, level2: el.value });
+                        setActive2(i);
+                        setActive3(-1);
                       }}
                     >
                       <span> {el.value}</span>
@@ -157,11 +181,12 @@ const Cascader: React.FC<CascaderProps> = ({ data, keys }) => {
                     .filter((sp) => sp.key === "Speciality")
                     .map((elem, i) => (
                       <li
-                        className="level2-item"
+                        className={active3 === i ? "active" : "desactive"}
                         key={i}
-                        onClick={() =>
-                          setFilter({ ...filter, level3: elem.value })
-                        }
+                        onClick={() => {
+                          setFilter({ ...filter, level3: elem.value });
+                          setActive3(i);
+                        }}
                       >
                         {elem.value}
                       </li>
@@ -178,14 +203,16 @@ const Cascader: React.FC<CascaderProps> = ({ data, keys }) => {
                   .filter((f) => f.key === "LevelofExpertise")
                   .map((el, i) => (
                     <li
-                      className="level1-item"
+                      className={active2 === i ? "active" : "desactive"}
                       key={i}
                       onClick={() => {
                         setFilter({
                           ...filter,
                           level2: el.value,
                         });
-                        setShowSeniority(!showSeniority);
+                        setShowSeniority(true);
+                        setActive2(i);
+                        setActive3(-1);
                       }}
                     >
                       {el.value}
@@ -198,11 +225,12 @@ const Cascader: React.FC<CascaderProps> = ({ data, keys }) => {
                     .filter((sp) => sp.key === "jobTitle")
                     .map((elem, i) => (
                       <li
-                        className="level2-item"
+                        className={active3 === i ? "active" : "desactive"}
                         key={i}
-                        onClick={() =>
-                          setFilter({ ...filter, level3: elem.value })
-                        }
+                        onClick={() => {
+                          setFilter({ ...filter, level3: elem.value });
+                          setActive3(i);
+                        }}
                       >
                         {elem.value}
                       </li>
@@ -218,14 +246,16 @@ const Cascader: React.FC<CascaderProps> = ({ data, keys }) => {
                   .filter((f) => f.key === "field")
                   .map((el, i) => (
                     <li
-                      className="level1-item"
+                      className={active2 === i ? "active" : "desactive"}
                       key={i}
                       onClick={() => {
-                        setShowField(!showField);
+                        setShowField(true);
                         setFilter({
                           ...filter,
                           level2: el.value,
                         });
+                        setActive2(i);
+                        setActive3(-1);
                       }}
                     >
                       {el.value}
@@ -238,11 +268,12 @@ const Cascader: React.FC<CascaderProps> = ({ data, keys }) => {
                     .filter((sp) => sp.key === "jobTitle")
                     .map((elem, i) => (
                       <li
-                        className="level2-item"
+                        className={active3 === i ? "active" : "desactive"}
                         key={i}
-                        onClick={() =>
-                          setFilter({ ...filter, level3: elem.value })
-                        }
+                        onClick={() => {
+                          setFilter({ ...filter, level3: elem.value });
+                          setActive3(i);
+                        }}
                       >
                         {elem.value}
                       </li>
@@ -260,14 +291,16 @@ const Cascader: React.FC<CascaderProps> = ({ data, keys }) => {
                   .filter((f) => f.key === "industry")
                   .map((el, i) => (
                     <li
-                      className="level1-item"
+                      className={active2 === i ? "active" : "desactive"}
                       key={i}
                       onClick={() => {
-                        setShowIndustry(!showIndustry);
+                        setShowIndustry(true);
                         setFilter({
                           ...filter,
                           level2: el.value,
                         });
+                        setActive2(i);
+                        setActive3(-1);
                       }}
                     >
                       {el.value}
@@ -280,11 +313,12 @@ const Cascader: React.FC<CascaderProps> = ({ data, keys }) => {
                     .filter((sp) => sp.key === "jobTitle")
                     .map((elem, i) => (
                       <li
-                        className="level2-item"
+                        className={active3 === i ? "active" : "desactive"}
                         key={i}
-                        onClick={() =>
-                          setFilter({ ...filter, level3: elem.value })
-                        }
+                        onClick={() => {
+                          setFilter({ ...filter, level3: elem.value });
+                          setActive3(i);
+                        }}
                       >
                         {elem.value}
                       </li>
