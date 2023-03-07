@@ -45,6 +45,7 @@ export default function SelectGeneric<SItem>({
   return (
     <div
       className="sl-container"
+      tabIndex={0}
       onBlur={() => setShow(false)}
       onClick={() => setShow((prev) => !prev)}
     >
