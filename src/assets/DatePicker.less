@@ -1,0 +1,32 @@
+.dp-calender {
+  border: 1px #338080 solid;
+  border-radius: 7px;
+
+  cursor: pointer;
+}
+.dp-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 10px;
+  border-bottom: 1px lightgrey solid;
+}
+.left-arrow,
+.right-arrow {
+  &:hover {
+    transform: scale(1.1);
+  }
+}
+.dp-body {
+  margin: 5px;
+}
+.calender-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 10px;
+}
+.days {
+  font-weight: bold;
+  margin: 0;
+  text-align: center;
+}
