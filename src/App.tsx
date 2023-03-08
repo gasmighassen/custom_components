@@ -111,7 +111,9 @@ function App() {
           data={data3}
         />
       </div>
-
+      <div className="datePicker">
+        <DatePicker />
+      </div>
       <div className="carou">
         <Carousel slidNb={3}>
           <CarouselItem>
@@ -163,9 +165,6 @@ function App() {
             </div>
           </CarouselItem>
         </Carousel>
-      </div>
-      <div className="datePicker">
-        <DatePicker />
       </div>
     </div>
   );
