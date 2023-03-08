@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "../_dist/DatePicker.css";
 type Props = {};
 
@@ -20,13 +20,16 @@ const DatePicker = (props: Props) => {
   const dayNames = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
   const [currentMonth, setCurrentMonth] = useState(new Date().getMonth());
   const [currentYear, setCurrentYear] = useState(new Date().getFullYear());
+  const [selected, setSelected] = useState<any>({});
+
+  const [selectedDate, setSelectedDate] = useState<any>();
 
   const getNumberOfDaysInMonth = (year: number, month: number) => {
     return new Date(year, month + 1, 0).getDate();
   };
 
   const getSortedDays = (year: number, month: number) => {
-    const dayIndex = getNumberOfDaysInMonth(year, month);
+    const dayIndex = new Date(year, month, 1).getDay();
     const firstHalf = dayNames.slice(dayIndex);
     return [...firstHalf, ...dayNames.slice(0, dayIndex)];
   };
@@ -43,6 +46,24 @@ const DatePicker = (props: Props) => {
     return result;
   };
 
+  const nextMonth = () => {
+    if (currentMonth < 11) {
+      setCurrentMonth((prev) => prev + 1);
+    } else {
+      setCurrentMonth(0);
+      setCurrentYear((prev) => prev + 1);
+    }
+  };
+
+  const prevMonth = () => {
+    if (currentMonth > 0) {
+      setCurrentMonth((prev) => prev - 1);
+    } else {
+      setCurrentMonth(11);
+      setCurrentYear((prev) => prev - 1);
+    }
+  };
+
   return (
     <div className="dp-container">
       <div className="dp-calender">
@@ -51,6 +72,7 @@ const DatePicker = (props: Props) => {
             className="left-arrow"
             src="../../images/left_arrow.svg"
             alt=""
+            onClick={() => prevMonth()}
           />
           <p>
             {monthNames[currentMonth]} {currentYear}
@@ -59,6 +81,7 @@ const DatePicker = (props: Props) => {
             className="right-arrow"
             src="../../images/right_arrow.svg"
             alt=""
+            onClick={() => nextMonth()}
           />
         </div>
         <div className="dp-body">
@@ -71,8 +94,27 @@ const DatePicker = (props: Props) => {
             {range(
               1,
               getNumberOfDaysInMonth(currentYear, currentMonth) + 1
-            ).result.map((day: any) => (
-              <p className="days">{day}</p>
+            ).result.map((day, i) => (
+              <p
+                className={
+                  selected.day === i &&
+                  selected.month === currentMonth &&
+                  selected.year === currentYear
+                    ? "selected-day"
+                    : ""
+                }
+                onClick={(e) => {
+                  setSelectedDate(new Date(currentYear, currentMonth, day));
+                  setSelected({
+                    ...selected,
+                    day: i,
+                    month: currentMonth,
+                    year: currentYear,
+                  });
+                }}
+              >
+                {day}
+              </p>
             ))}
           </div>
         </div>
