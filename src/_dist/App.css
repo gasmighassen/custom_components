@@ -25,3 +25,8 @@
 .multidrop {
   width: 100%;
 }
+.datePicker {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
