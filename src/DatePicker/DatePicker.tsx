@@ -1,9 +1,13 @@
 import React, { useEffect, useState } from "react";
 import "../_dist/DatePicker.css";
-import { stringify } from "querystring";
-type Props = {};
+import { CalendarOutlined } from "@ant-design/icons";
 
-const DatePicker = (props: Props) => {
+type Props = {
+  value: React.Dispatch<any>;
+  startEnd?: boolean;
+};
+
+const DatePicker: React.FC<Props> = ({ value, startEnd = false }) => {
   const monthNames = [
     "January",
     "February",
@@ -22,8 +26,7 @@ const DatePicker = (props: Props) => {
   const [currentMonth, setCurrentMonth] = useState(new Date().getMonth());
   const [currentYear, setCurrentYear] = useState(new Date().getFullYear());
   const [selected, setSelected] = useState<any>({});
-  const [show, setShow] = useState(false);
-
+  const [showCalender, setShowCalender] = useState(false);
   const [selectedDate, setSelectedDate] = useState<any>({
     day: "DD",
     month: "MM",
@@ -32,7 +35,9 @@ const DatePicker = (props: Props) => {
 
   let finaleDate =
     selectedDate.day + "/" + selectedDate.month + "/" + selectedDate.year;
-
+  useEffect(() => {
+    value(finaleDate);
+  }, [finaleDate]);
   const getNumberOfDaysInMonth = (year: number, month: number) => {
     return new Date(year, month + 1, 0).getDate();
   };
@@ -75,83 +80,90 @@ const DatePicker = (props: Props) => {
 
   return (
     <div className="dp-container">
-      {finaleDate === "DD/MM/YYYY" ? (
-        <input
-          type="text"
-          className="calender-input"
-          placeholder="Select Date..."
-          onClick={() => setShow(!show)}
-        />
-      ) : (
-        <input
-          type="text"
-          className="calender-input"
-          value={finaleDate}
-          onClick={() => setShow(!show)}
-        />
-      )}
+      <>
+        {finaleDate === "DD/MM/YYYY" ? (
+          <div className="dp-input-container">
+            <input
+              type="text"
+              className="calender-input"
+              placeholder="Select Date..."
+              onClick={() => setShowCalender(!showCalender)}
+            />
+            <CalendarOutlined />
+          </div>
+        ) : (
+          <div className="dp-input-container">
+            <input
+              type="text"
+              className="calender-input"
+              value={finaleDate}
+              onClick={() => setShowCalender(!showCalender)}
+            />
+            <CalendarOutlined />
+          </div>
+        )}
 
-      {show && (
-        <div className="dp-calender">
-          <div className="dp-header">
-            <img
-              className="left-arrow"
-              src="../../images/left_arrow.svg"
-              alt=""
-              onClick={() => prevMonth()}
-            />
-            <p>
-              {monthNames[currentMonth]} {currentYear}
-            </p>
-            <img
-              className="right-arrow"
-              src="../../images/right_arrow.svg"
-              alt=""
-              onClick={() => nextMonth()}
-            />
-          </div>
-          <div className="dp-body">
-            <div className="calender-grid">
-              {getSortedDays(currentYear, currentMonth).map((day) => (
-                <p className="days">{day}</p>
-              ))}
+        {showCalender && (
+          <div className="dp-calender">
+            <div className="dp-header">
+              <img
+                className="left-arrow"
+                src="../../images/left_arrow.svg"
+                alt=""
+                onClick={() => prevMonth()}
+              />
+              <p>
+                {monthNames[currentMonth]} {currentYear}
+              </p>
+              <img
+                className="right-arrow"
+                src="../../images/right_arrow.svg"
+                alt=""
+                onClick={() => nextMonth()}
+              />
             </div>
-            <div className="calender-grid">
-              {range(
-                1,
-                getNumberOfDaysInMonth(currentYear, currentMonth) + 1
-              ).result.map((day, i) => (
-                <p
-                  className={
-                    selected.day === i &&
-                    selected.month === currentMonth &&
-                    selected.year === currentYear
-                      ? "selected-day"
-                      : "not-selected"
-                  }
-                  onClick={(e) => {
-                    setSelectedDate({
-                      ...selectedDate,
-                      day: day,
-                      month: currentMonth + 1,
-                      year: currentYear,
-                    });
-                    setSelected({
-                      ...selected,
-                      day: i,
-                      month: currentMonth,
-                      year: currentYear,
-                    });
-                    setShow(false);
-                  }}
-                >
-                  {day}
-                </p>
-              ))}
+            <div className="dp-body">
+              <div className="calender-grid">
+                {getSortedDays(currentYear, currentMonth).map((day) => (
+                  <p className="days">{day}</p>
+                ))}
+              </div>
+              <div className="calender-grid">
+                {range(
+                  1,
+                  getNumberOfDaysInMonth(currentYear, currentMonth) + 1
+                ).result.map((day, i) => (
+                  <p
+                    className={
+                      selected.day === i &&
+                      selected.month === currentMonth &&
+                      selected.year === currentYear
+                        ? "selected-day"
+                        : "not-selected"
+                    }
+                    onClick={(e) => {
+                      setSelectedDate({
+                        ...selectedDate,
+                        day: day,
+                        month: currentMonth + 1,
+                        year: currentYear,
+                      });
+                      setSelected({
+                        ...selected,
+                        day: i,
+                        month: currentMonth,
+                        year: currentYear,
+                      });
+                    }}
+                  >
+                    {day}
+                  </p>
+                ))}
+              </div>
             </div>
           </div>
-        </div>
-      )}
+        )}
+      </>
     </div>
   );
 };

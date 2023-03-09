@@ -18,7 +18,7 @@ function App() {
     console.log("tested");
   };
   const [value, setValue] = useState([]);
-  const [value2, setValue2] = useState<any>([]);
+  const [value2, setValue2] = useState<any>();
   const [value3, setValue3] = useState(false);
   const [first, setfirst] = useState<string | undefined | number>("");
   const label = "Name";
@@ -112,7 +112,7 @@ function App() {
         />
       </div>
       <div className="datePicker">
-        <DatePicker />
+        <DatePicker value={setValue2} startEnd />
       </div>
       <div className="carou">
         <Carousel slidNb={3}>

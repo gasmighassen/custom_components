@@ -186,10 +186,10 @@
 .dp-container {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
   row-gap: 7px;
-  width: 25vw;
+  width: 100%;
   position: relative;
 }
 .dp-calender {
@@ -202,7 +202,6 @@
   top: 6vh;
   z-index: 1000;
   background-color: #ffffff;
-  width: 100%;
 }
 .dp-header {
   display: flex;
@@ -237,13 +236,18 @@
   font-family: "Poppins", sans-serif;
 }
 .selected-day {
+  width: 25px;
+  height: 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   border-radius: 50%;
   background-color: #338080;
   color: white;
   text-align: center;
   font-weight: bold;
   font-family: "Poppins", sans-serif;
-  padding: 10px;
+  padding: 1%;
   margin: 0;
 }
 .not-selected {
@@ -254,11 +258,8 @@
   margin: 0;
 }
 .calender-input {
-  width: 95%;
-  padding: 7px;
-  border-radius: 7px;
+  border: none;
   outline: none;
-  border: #338080 1px solid;
   font-family: "Poppins", sans-serif;
 }
 .calender-input::placeholder {
@@ -274,4 +275,12 @@
     opacity: 1;
     top: 6vh;
   }
+}
+.dp-input-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: #338080 1px solid;
+  border-radius: 7px;
+  padding: 7px;
 }

@@ -52,7 +52,7 @@ const Cascader: React.FC<CascaderProps> = ({ data, keys, value }) => {
       className="cascader"
       tabIndex={0}
       onBlur={() => {
-        setShow(!show);
+        setShow(false);
       }}
     >
       <div className="cascader-input" onClick={() => setShow(!show)}>
