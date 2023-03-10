@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "../_dist/Cascader.css";
-import { stringify } from "querystring";
+
 
 interface ArrayProp<T> {
   [key: string]: T;

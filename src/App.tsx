@@ -12,6 +12,9 @@ import SelectGeneric from "./Select/SelectGeneric";
 
 import Cascader from "./Cascader/Cascader";
 import DatePicker from "./DatePicker/DatePicker";
+import Transfer from "./Transfer/Transfer";
+
+import { mockData } from "./data/data";
 
 function App() {
   const test = () => {
@@ -165,6 +168,9 @@ function App() {
             </div>
           </CarouselItem>
         </Carousel>
+      </div>
+      <div className="transfer">
+        <Transfer data={mockData} />
       </div>
     </div>
   );

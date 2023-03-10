@@ -2098,3 +2098,62 @@ export const data3 = [
     userId: "101b0f10-1c59-45cb-a915-a4befc639e75",
   },
 ];
+export const mockData = [
+  {
+    key: Math.random().toString(),
+    title: "Teaching (Functional)",
+    image: "",
+  },
+  {
+    key: Math.random().toString(),
+    title: "Teaching (Structural)",
+    image: "",
+  },
+  {
+    key: Math.random().toString(),
+    title: "Teaching (In-Depth)",
+    image: "",
+  },
+
+  {
+    key: Math.random().toString(),
+    title: "Thinking outside the box (Functional)",
+    image: "",
+  },
+
+  {
+    key: Math.random().toString(),
+    title: "Thinking outside the box (Structural)",
+    image: "",
+  },
+  {
+    key: Math.random().toString(),
+    title: "Thinking outside the box (In-Depth)",
+    image: "",
+  },
+  {
+    key: Math.random().toString(),
+    title: "Analyzing information (In-Depth)",
+    image: "",
+  },
+  {
+    key: Math.random().toString(),
+    title: "Building Rapport (Functional)",
+    image: "",
+  },
+  {
+    key: Math.random().toString(),
+    title: "cognitive flexibility (Functional)",
+    image: "",
+  },
+  {
+    key: Math.random().toString(),
+    title: "Gathering information (In-Depth)",
+    image: "",
+  },
+  {
+    key: Math.random().toString(),
+    title: "Pitching (Structural)",
+    image: "",
+  },
+];
