@@ -1,4 +1,4 @@
-import React, { ReactNode, useState } from "react";
+import React, { ReactNode, useEffect, useState } from "react";
 import "../_dist/Transfer.css";
 import { SearchOutlined } from "@ant-design/icons";
 
@@ -11,40 +11,36 @@ type transferProps = {
 
 const Transfer: React.FC<transferProps> = ({ data }) => {
   const [resetClicked, setResetClicked] = useState("");
-  const [fromData, setFromData] = useState(data);
-  const [toData, setToData] = useState<ArrayProp<any>[]>([]);
-  const [finalSelection, setFinalSelection] = useState<ArrayProp<any>[]>([]);
+  const [targetKeys, setTargetKeys] = useState<ArrayProp<any>[]>([]);
+  const [selectedItems, setSelectedItems] = useState<ArrayProp<any>[]>([]);
+  const [check, setCheck] = useState<boolean>();
+  useEffect(() => {
+    setCheck(selectedItems.length ? true : false);
+  }, [selectedItems]);
 
-  const handleCheck = (e: React.ChangeEvent<HTMLInputElement>) => {
-    let selected = toData;
-    if (e.target.checked) {
-      selected.push(JSON.parse(e.target.value));
-    } else {
-      selected.splice(selected.indexOf(JSON.parse(e.target.value)), 1);
-    }
-    setToData(selected);
-  };
-  const handleRemove = (e: React.MouseEvent<HTMLInputElement, MouseEvent>) => {
-    console.log(e.currentTarget.getAttribute("data-data"));
-    let toRemove = [...toData];
-    let removed = toRemove.filter(
-      (el) => el.key !== e.currentTarget.getAttribute("data-data")
-    );
-    setToData(removed);
-  };
+  const [filter, setFilter] = useState("");
+  const filtredData = data
+    .filter((f) => f.title.toLowerCase().includes(filter.toLocaleLowerCase()))
+    .filter((el) => !targetKeys.includes(el));
 
+  const handleSelect = (value: ArrayProp<any>) => {
+    selectedItems.filter((item: any) => item === value).length
+      ? setSelectedItems(selectedItems.filter((item: any) => item !== value))
+      : setSelectedItems([...selectedItems, value]);
+  };
+  const addTargetKey = () => {
+    setTargetKeys(selectedItems);
+  };
+  const removeTargetKey = (value: ArrayProp<any>) => {
+    setTargetKeys(targetKeys.filter((item: any) => item !== value));
+    setSelectedItems(selectedItems.filter((item: any) => item !== value));
+  };
   const handleResetAnimation = () => {
     setResetClicked("reseting");
+    setFilter("");
     setTimeout(() => {
       setResetClicked("");
     }, 1000);
-  };
-  const handleSelection = () => {
-    const newData = fromData.filter(
-      (fd) => !toData.some((td) => td.key === fd.key)
-    );
-    setFromData(newData);
-    setFinalSelection(toData);
   };
 
   return (
@@ -58,22 +54,20 @@ const Transfer: React.FC<transferProps> = ({ data }) => {
             type="search"
             placeholder="Search"
             className="tsf-search-input"
+            value={filter}
+            onChange={(e) => setFilter(e.target.value)}
           />
           <SearchOutlined />
         </div>
         <div className="tsf-item-list">
-          {fromData.map((el: any, i) => (
-            <div key={i}>
+          {filtredData.map((el) => (
+            <div onClick={() => handleSelect(el)}>
               <input
                 type="checkbox"
-                name={el.key}
-                id={el.title}
-                value={JSON.stringify(el)}
-                onChange={(e) => {
-                  handleCheck(e);
-                }}
+                name=""
+                checked={selectedItems.includes(el)}
               />
-              <label htmlFor={el.title}>{el.title}</label>
+              <label htmlFor="">{el.title}</label>
             </div>
           ))}
         </div>
@@ -91,16 +85,17 @@ const Transfer: React.FC<transferProps> = ({ data }) => {
         </div>
       </div>
       <button
-        className="tsf-btn"
+        className={check ? "tsf-btn" : "tsf-btn disabled"}
         onClick={() => {
-          handleSelection();
+          addTargetKey();
+          setCheck(false);
         }}
       >
         <img src="../../images/right_arrow.svg" alt="" />
       </button>
       <div className="tsf-list">
         <div className="tsf-head">
-          <p>Selected items</p>
+          <p>{targetKeys.length} Selected items</p>
         </div>
         <div className="tsf-search">
           <input
@@ -111,21 +106,12 @@ const Transfer: React.FC<transferProps> = ({ data }) => {
           <SearchOutlined />
         </div>
         <div className="tsf-item-list">
-          {finalSelection.map((data, i) => (
-            <div key={i}>
-              <input
-                type="checkbox"
-                name={data.key}
-                id={data.title}
-                value={data[i]}
-              />
-              <label htmlFor={data.title}>{data.title}</label>
-              <input
-                type="button"
-                value="delete"
-                data-data={data.key}
-                onClick={(e) => handleRemove(e)}
-              />
+          {targetKeys.map((el, i) => (
+            <div key={i} className="tsf-target">
+              <span>{el.title}</span>
+              <span onClick={() => removeTargetKey(el)} className="tsf-delete">
+                <img src="../../images/delete.svg" alt="" />
+              </span>
             </div>
           ))}
         </div>

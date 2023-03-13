@@ -4,10 +4,9 @@ import { CalendarOutlined } from "@ant-design/icons";
 
 type Props = {
   value: React.Dispatch<any>;
-  startEnd?: boolean;
 };
 
-const DatePicker: React.FC<Props> = ({ value, startEnd = false }) => {
+const DatePicker: React.FC<Props> = ({ value }) => {
   const monthNames = [
     "January",
     "February",
