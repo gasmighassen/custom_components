@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "../_dist/Cascader.css";
 
-
 interface ArrayProp<T> {
   [key: string]: T;
 }

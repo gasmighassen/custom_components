@@ -115,7 +115,7 @@ function App() {
         />
       </div>
       <div className="datePicker">
-        <DatePicker value={setValue2} startEnd />
+        <DatePicker value={setValue2} />
       </div>
       <div className="carou">
         <Carousel slidNb={3}>
